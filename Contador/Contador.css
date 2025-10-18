@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg-color: #070b24;
+    --text-color: #ffffff;
+    --accent-color: #00e1ff; /* Adjusted for the new design's blue glow */
+    --card-bg: rgba(0, 162, 255, 0.1); /* Semi-transparent blue for cards */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+    --border-opacity: 0.5;
+    --border-blur: 4px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.galaxy-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #0c164d 0%, #030610 100%);
+    z-index: -2;
+    overflow: hidden;
+}
+
+/* Background effects from the original code */
+.galaxy-background::before, .galaxy-background::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+}
+
+.galaxy-background::before {
+    background-image: radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 20px 50px, #ffffff, rgba(0,0,0,0)), radial-gradient(3px 3px at 30px 100px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 70px 200px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 200px 90px, rgba(255,255,255,0.8), rgba(0,0,0,0)), radial-gradient(2px 2px at 300px 220px, rgba(255,255,255,0.8), rgba(0,0,0,0)), radial-gradient(3px 3px at 350px 340px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 400px 400px;
+    animation: stars-move 50s linear infinite;
+}
+
+.galaxy-background::after {
+    background: radial-gradient(ellipse at center, rgba(124, 0, 255, 0.2) 0%, rgba(0, 0, 0, 0) 60%), radial-gradient(ellipse at center, rgba(0, 187, 255, 0.15) 0%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse at center, rgba(255, 0, 136, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    animation: nebula-shift 20s ease infinite alternate;
+    transform-origin: center;
+}
+
+@keyframes stars-move {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-400px); }
+}
+
+@keyframes nebula-shift {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.coming-soon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(0, 225, 255, 0.8), 0 0 20px rgba(0, 225, 255, 0.6);
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.timer-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 225, 255, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 225, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.timer-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 225, 255, 0.7) 0%,
+        transparent 35%,
+        transparent 65%,
+        rgba(0, 225, 255, 0.7) 100%
+    );
+    z-index: -1;
+    filter: blur(4px);
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.timer-card:hover {
+    box-shadow: 0 0 25px rgba(0, 225, 255, 0.6);
+}
+
+.timer-card:hover::before {
+    opacity: 0.9;
+}
+
+.timer-value {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(0, 225, 255, 0.8);
+    animation: timer-glow 2s ease-in-out infinite alternate;
+}
+
+.timer-label {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.5rem;
+}
+
+@keyframes timer-glow {
+    0% {
+        text-shadow: 0 0 8px rgba(0, 225, 255, 0.8), 0 0 15px rgba(0, 225, 255, 0.6);
+    }
+    100% {
+        text-shadow: 0 0 12px rgba(0, 225, 255, 1), 0 0 25px rgba(0, 225, 255, 0.8);
+    }
+}
+
+.description {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    max-width: 600px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.learn-more-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 30px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(0, 225, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 225, 255, 0.8);
+}
+
+.learn-more-btn:active {
+    transform: translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    .countdown-timer {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .timer-card {
+        width: 100px;
+        padding: 1rem;
+    }
+    .timer-value {
+        font-size: 2rem;
+    }
+    .timer-label {
+        font-size: 0.8rem;
+    }
+    .description {
+        font-size: 1rem;
+    }
+    .learn-more-btn {
+        padding: 0.8rem 2.5rem;
+    }
+}
